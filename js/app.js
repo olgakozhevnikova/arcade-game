@@ -1,8 +1,8 @@
 // Creating Enemy class
-var Enemy = function(x, y) {
+var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y;
-    this.speed = 10;
+    this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -10,7 +10,7 @@ var Enemy = function(x, y) {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter which will ensure the game runs at the same speed for all computers.
-    this.x += 10 * this.speed *dt;
+    this.x += 10 * this.speed * dt;
     // Handle collision with the Player
     if (parseInt(this.x) <= player.x + 60 && player.x <= parseInt(this.x) + 70 && this.y === player.y) {
         console.log('collision');
@@ -76,7 +76,7 @@ Player.prototype.reset = function() {
 }
 
 // Instantiating my objects
-const allEnemies = [new Enemy(-50, 60), new Enemy(-100, 145), new Enemy(-150, 230)];
+const allEnemies = [new Enemy(-300, 60, 10), new Enemy(-100, 145, 15), new Enemy(-200, 230, 30)];
 
 const player = new Player(200, 400);
 
@@ -91,3 +91,20 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('keyup', (event) => {
     delete keyClick[event.keyCode];
 });
+
+function randomFunc(n) {
+    return Math.floor(Math.random() * n);
+}
+
+const positionX = [-100, -200, -300, -400];
+
+const positionY = [60, 145, 230];
+
+const speedOptions = [10, 20, 30, 40, 50];
+
+setInterval(function() {
+    let enemyX = positionX[randomFunc(4)];
+    let enemyY = positionY[randomFunc(3)];
+    let enemySpeed = speedOptions[randomFunc(5)];
+    allEnemies.push(new Enemy(enemyX, enemyY, enemySpeed));
+}, 800);
