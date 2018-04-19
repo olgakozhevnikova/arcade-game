@@ -22,12 +22,14 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-var Player = function() {
-    this.x = 200;
-    this.y = 390;
+var Player = function(x, y) {
+    this.x = x;
+    this.y = y;
     this.speed1 = 85; // Move up and down
     this.speed2 = 100; // Move left and right
     this.sprite = 'images/char-boy.png';
+    this.startX = 200;
+    this.startY = 390;
 }
 
 Player.prototype.update = function() {
@@ -45,8 +47,13 @@ Player.prototype.handleInput = function() {
         this.x -= this.speed2;
     }
 
-    if (38 in keyClick && this.y > 0) {
+    if (38 in keyClick && this.y >= 50) {
         this.y -= this.speed1;
+    }
+
+    if (38 in keyClick && this.y < 50) {
+        this.x = this.startX;
+        this.y = this.startY;
     }
 
     if (39 in keyClick && this.x < 305) {
@@ -61,7 +68,7 @@ Player.prototype.handleInput = function() {
 // Instantiating my objects
 const allEnemies = [new Enemy(-50, 60), new Enemy(-100, 145), new Enemy(-150, 225)];
 
-const player = new Player();
+const player = new Player(200, 390);
 
 // This listens for key presses and sends the keys to handleInput() method
 const keyClick = {};
