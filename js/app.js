@@ -11,6 +11,11 @@ var Enemy = function(x, y) {
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter which will ensure the game runs at the same speed for all computers.
     this.x += 10 * this.speed *dt;
+    // Handle collision with the Player
+    if (parseInt(this.x) <= player.x + 60 && player.x <= parseInt(this.x) + 70 && this.y === player.y) {
+        console.log('collision');
+        player.reset();
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -29,11 +34,11 @@ var Player = function(x, y) {
     this.speed2 = 100; // Move left and right
     this.sprite = 'images/char-boy.png';
     this.startX = 200;
-    this.startY = 390;
+    this.startY = 400;
 }
 
 Player.prototype.update = function() {
-    //console.log('hello');
+    
 };
 
 // Draw the player on the screen
@@ -52,23 +57,28 @@ Player.prototype.handleInput = function() {
     }
 
     if (38 in keyClick && this.y < 50) {
-        this.x = this.startX;
-        this.y = this.startY;
+        player.reset();
     }
 
     if (39 in keyClick && this.x < 305) {
         this.x += this.speed2;
     }
 
-    if (40 in keyClick && this.y < 390) {
+    if (40 in keyClick && this.y < 400) {
         this.y += this.speed1;
     } 
 };
 
-// Instantiating my objects
-const allEnemies = [new Enemy(-50, 60), new Enemy(-100, 145), new Enemy(-150, 225)];
+// If the player reaches the water the game should be reset by moving the player back to the initial location
+Player.prototype.reset = function() {
+    this.x = this.startX;
+    this.y = this.startY;
+}
 
-const player = new Player(200, 390);
+// Instantiating my objects
+const allEnemies = [new Enemy(-50, 60), new Enemy(-100, 145), new Enemy(-150, 230)];
+
+const player = new Player(200, 400);
 
 // This listens for key presses and sends the keys to handleInput() method
 const keyClick = {};
