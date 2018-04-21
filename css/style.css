@@ -1,3 +1,18 @@
 body {
     text-align: center;
 }
+
+@font-face {
+	font-family: downloadedFont;
+	src: url('Motorless Font Family/Motorless-Hammered.ttf');
+}
+
+h1 {
+	text-transform: uppercase;
+	font-family: downloadedFont;
+}
+
+canvas {
+	margin-top: -3em;
+}
+

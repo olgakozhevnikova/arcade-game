@@ -13,7 +13,6 @@ Enemy.prototype.update = function(dt) {
     this.x += 10 * this.speed * dt;
     // Handle collision with the Player
     if (parseInt(this.x) <= player.x + 60 && player.x <= parseInt(this.x) + 70 && this.y === player.y) {
-        console.log('collision');
         player.reset();
     }
 };
@@ -24,9 +23,6 @@ Enemy.prototype.render = function() {
 };
 
 // Creating Player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
 var Player = function(x, y) {
     this.x = x;
     this.y = y;
@@ -47,25 +43,26 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function() {
-    // Move player left, up, right, down and prevent the player from moving outside of the canvas
+    // Move player and prevent the player from moving outside of the canvas
     if (37 in keyClick && this.x > 0) {
-        this.x -= this.speed2;
+        this.x -= this.speed2; // left
     }
 
     if (38 in keyClick && this.y >= 50) {
-        this.y -= this.speed1;
+        this.y -= this.speed1; // up
     }
 
+    // When the player reaches the water, set its position to initial
     if (38 in keyClick && this.y < 50) {
         player.reset();
     }
 
     if (39 in keyClick && this.x < 305) {
-        this.x += this.speed2;
+        this.x += this.speed2; //right
     }
 
     if (40 in keyClick && this.y < 400) {
-        this.y += this.speed1;
+        this.y += this.speed1; // down
     } 
 };
 
@@ -82,12 +79,10 @@ const player = new Player(200, 400);
 
 // This listens for key presses and sends the keys to handleInput() method
 const keyClick = {};
-
 document.addEventListener('keydown', function(e) {
     keyClick[event.keyCode] = true;
     player.handleInput(keyClick[e.keyCode]);
 });
-
 document.addEventListener('keyup', (event) => {
     delete keyClick[event.keyCode];
 });
@@ -96,12 +91,16 @@ function randomFunc(n) {
     return Math.floor(Math.random() * n);
 }
 
+// Starting positions of bugs on X-axis
 const positionX = [-100, -200, -300, -400];
 
+// Starting positions of bugs on Y-axis
 const positionY = [60, 145, 230];
 
+// Possible speeds of bugs
 const speedOptions = [10, 20, 30, 40, 50];
 
+// Show bugs non-stop
 setInterval(function() {
     let enemyX = positionX[randomFunc(4)];
     let enemyY = positionY[randomFunc(3)];
