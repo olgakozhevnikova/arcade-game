@@ -1,3 +1,6 @@
+// Declare variable for scores
+let scoreVal = 0;
+
 // Creating Enemy class
 let Enemy = function(x, y, speed) {
     this.x = x;
@@ -48,13 +51,13 @@ Player.prototype.handleInput = function() {
         this.x -= this.speed2; // left
     }
 
-    if (38 in keyClick && this.y >= 50) {
+    if (38 in keyClick && this.y > 0) {
         this.y -= this.speed1; // up
     }
 
     // When the player reaches the water, set its position to initial
     if (38 in keyClick && this.y < 50) {
-        player.reset();
+        reachedWater();
     }
 
     if (39 in keyClick && this.x < 305) {
@@ -84,16 +87,20 @@ Life.prototype.render = function() {
 };
 
 // Create Score class
-let Score = function(x, y, score) {
+let Score = function(x, y) {
     this.x = x,
     this.y = y,
-    this.score = 'SCORES:  ' + score;
+    this.score = 'SCORES:  ' + scoreVal;
 }
 
 Score.prototype.render = function() {
     ctx.font="14px downloadedFont";
     ctx.fillText(this.score, this.x, this.y);
 };
+
+Score.prototype.update = function() {
+    this.score = 'SCORES:  ' + scoreVal;
+}
 
 // Instantiating my objects
 const allEnemies = [new Enemy(-300, 60, 10), new Enemy(-100, 145, 15), new Enemy(-200, 230, 30)];
@@ -134,3 +141,8 @@ setInterval(function() {
     let enemySpeed = speedOptions[randomFunc(5)];
     allEnemies.push(new Enemy(enemyX, enemyY, enemySpeed));
 }, 800);
+
+function reachedWater() {
+    scoreVal += 100;
+    player.reset();
+}
