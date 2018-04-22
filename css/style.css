@@ -18,8 +18,26 @@ h1 {
 	font-family: downloadedFont;
 }
 
+#section, #canvas {
+    display: inline-block;
+}
+
+#section {
+    float: right;
+    overflow: hidden;
+    margin-right: 8em;
+}
+
+#canvas {
+    overflow: hidden;
+}
+
 canvas {
 	margin-top: -3em;
+}
+
+#characters {
+    visibility: hidden;
 }
 
 .modal {

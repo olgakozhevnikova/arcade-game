@@ -26,7 +26,14 @@ var Engine = (function(global) {
 
     canvas.width = 505;
     canvas.height = 606;
-    document.getElementById('content').appendChild(canvas);
+    document.getElementById('canvas').appendChild(canvas);
+
+    // Another canvas to choose characters
+    var canvasCharacters = doc.createElement('canvas'),
+        ctxChar = canvasCharacters.getContext('2d');
+    canvasCharacters.width = 100;
+    canvasCharacters.height = 600;
+    document.getElementById('characters').appendChild(canvasCharacters);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -159,6 +166,9 @@ var Engine = (function(global) {
             life.render();
         });
         scores.render();
+        allCharacters.forEach(function(character) {
+            character.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to
@@ -174,11 +184,15 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png',
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png',
         'images/Heart.png',
         'images/Star.png'
     ]);
@@ -189,4 +203,5 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    global.ctxChar = ctxChar;
 })(this);

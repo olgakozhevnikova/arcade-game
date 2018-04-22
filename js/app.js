@@ -4,6 +4,9 @@ let scoreVal = 0;
 // Declare variable for collecting removed lives
 let lostLives = [];
 
+// Get characters'div
+let characters = document.getElementById('characters');
+
 // Get modals
 let winningModal = document.getElementById('winningModal');
 let losingModal = document.getElementById('losingModal');
@@ -98,8 +101,8 @@ Life.prototype.render = function() {
 
 // Create Score class
 let Score = function(x, y) {
-    this.x = x,
-    this.y = y,
+    this.x = x;
+    this.y = y;
     this.score = 'SCORES:  ' + scoreVal;
 }
 
@@ -112,6 +115,17 @@ Score.prototype.update = function() {
     this.score = 'SCORES:  ' + scoreVal;
 }
 
+let Character = function(x, y, name) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/char-' + name + '.png'
+}
+
+Character.prototype.render = function() {
+    ctxChar.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+
 // Instantiating my objects
 const allEnemies = [new Enemy(-300, 60, 10), new Enemy(-100, 145, 15), new Enemy(-200, 230, 30)];
 
@@ -120,6 +134,19 @@ const player = new Player(200, 400);
 let lives = [new Life(3, 540), new Life(36, 540), new Life(69, 540)];
 
 const scores = new Score(310, 570);
+
+const allCharacters = [
+    new Character(10, 0, 'boy'),
+    new Character(10, 100, 'cat-girl'),
+    new Character(10, 200, 'horn-girl'),
+    new Character(10, 300, 'pink-girl'),
+    new Character(10, 400, 'princess-girl'),
+];
+
+// Open menu to choose a character
+function showCharacters() {
+    characters.style.visibility = 'visible';
+}
 
 // This listens for key presses and sends the keys to handleInput() method
 const keyClick = {};
@@ -177,7 +204,6 @@ function collision() {
         scoreVal -= 500;
     }
     else scoreVal = 0;
-
 }
 
 // When scores are 1000 game over, player wins
@@ -205,3 +231,4 @@ function startGame() {
     lives = lostLives.reverse();
     lostLives = [];
 }
+
