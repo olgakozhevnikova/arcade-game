@@ -1,5 +1,5 @@
 // Creating Enemy class
-var Enemy = function(x, y, speed) {
+let Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -23,7 +23,7 @@ Enemy.prototype.render = function() {
 };
 
 // Creating Player class
-var Player = function(x, y) {
+let Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.speed1 = 85; // Move up and down
@@ -70,12 +70,39 @@ Player.prototype.handleInput = function() {
 Player.prototype.reset = function() {
     this.x = this.startX;
     this.y = this.startY;
+};
+
+// Create Life class
+let Life = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/Heart.png';
 }
+
+Life.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 30, 45);
+};
+
+// Create Score class
+let Score = function(x, y, score) {
+    this.x = x,
+    this.y = y,
+    this.score = 'SCORES:  ' + score;
+}
+
+Score.prototype.render = function() {
+    ctx.font="14px downloadedFont";
+    ctx.fillText(this.score, this.x, this.y);
+};
 
 // Instantiating my objects
 const allEnemies = [new Enemy(-300, 60, 10), new Enemy(-100, 145, 15), new Enemy(-200, 230, 30)];
 
 const player = new Player(200, 400);
+
+const lives = [new Life(3, 540), new Life(36, 540), new Life(69, 540)];
+
+const scores = new Score(310, 570);
 
 // This listens for key presses and sends the keys to handleInput() method
 const keyClick = {};

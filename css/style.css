@@ -2,6 +2,12 @@ body {
     text-align: center;
 }
 
+#content {
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+}
+
 @font-face {
 	font-family: downloadedFont;
 	src: url('Motorless Font Family/Motorless-Hammered.ttf');

@@ -26,7 +26,7 @@ var Engine = (function(global) {
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    document.getElementById('content').appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -154,6 +154,10 @@ var Engine = (function(global) {
         });
 
         player.render();
+        lives.forEach(function(life) {
+            life.render();
+        });
+        scores.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -173,7 +177,9 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Heart.png',
+        'images/Star.png'
     ]);
     Resources.onReady(init);
 
