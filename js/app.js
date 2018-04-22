@@ -1,6 +1,9 @@
 // Declare variable for scores
 let scoreVal = 0;
 
+// Declare variable for collecting removed lives
+let lostLives = [];
+
 // Get modals
 let winningModal = document.getElementById('winningModal');
 let losingModal = document.getElementById('losingModal');
@@ -114,7 +117,7 @@ const allEnemies = [new Enemy(-300, 60, 10), new Enemy(-100, 145, 15), new Enemy
 
 const player = new Player(200, 400);
 
-const lives = [new Life(3, 540), new Life(36, 540), new Life(69, 540)];
+let lives = [new Life(3, 540), new Life(36, 540), new Life(69, 540)];
 
 const scores = new Score(310, 570);
 
@@ -163,7 +166,8 @@ function collision() {
 
     // Remove 1 life
     if (lives.length > 0) {
-        lives.pop();
+        let life = lives.pop();
+        lostLives.push(life);
     }
     else {
         playerLost();
@@ -194,5 +198,6 @@ function playAgain() {
 // Set scores to 0 and lives to 3
 function startGame() {
     scoreVal = 0;
-    lives.render();
+    lives = lostLives.reverse();
+    lostLives = [];
 }
