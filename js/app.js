@@ -1,6 +1,10 @@
 // Declare variable for scores
 let scoreVal = 0;
 
+// Get modals
+let winningModal = document.getElementById('winningModal');
+let losingModal = document.getElementById('losingModal');
+
 // Creating Enemy class
 let Enemy = function(x, y, speed) {
     this.x = x;
@@ -16,7 +20,7 @@ Enemy.prototype.update = function(dt) {
     this.x += 10 * this.speed * dt;
     // Handle collision with the Player
     if (parseInt(this.x) <= player.x + 60 && player.x <= parseInt(this.x) + 70 && this.y === player.y) {
-        player.reset();
+        collision();
     }
 };
 
@@ -56,8 +60,11 @@ Player.prototype.handleInput = function() {
     }
 
     // When the player reaches the water, set its position to initial
-    if (38 in keyClick && this.y < 50) {
-        reachedWater();
+    if (38 in keyClick && this.y < 49) {
+        // To be sure that the player reached the water
+        setTimeout(function() {
+            reachedWater();
+        }, 100);
     }
 
     if (39 in keyClick && this.x < 305) {
@@ -142,7 +149,50 @@ setInterval(function() {
     allEnemies.push(new Enemy(enemyX, enemyY, enemySpeed));
 }, 800);
 
+// When player reaches the water
 function reachedWater() {
-    scoreVal += 100;
     player.reset();
+    scoreVal += 100;
+    playerWon();
+}
+
+// When collision happens
+function collision() {
+    // Move player to initial position
+    player.reset();
+
+    // Remove 1 life
+    if (lives.length > 0) {
+        lives.pop();
+    }
+    else {
+        playerLost();
+    }
+    // Decrease scores
+
+}
+
+// When scores are 1000 game over, player wins
+function playerWon() {
+    if (scoreVal === 1000) {
+        winningModal.style.display = 'block';
+    }
+}
+
+// Game over, when there are no lives
+function playerLost() {
+    losingModal.style.display = 'block';
+}
+
+// Modal's button to reset the game
+function playAgain() {
+    winningModal.style.display = 'none';
+    losingModal.style.display = 'none';
+    startGame();
+}
+
+// Set scores to 0 and lives to 3
+function startGame() {
+    scoreVal = 0;
+    lives.render();
 }
