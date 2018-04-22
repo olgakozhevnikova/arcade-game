@@ -173,6 +173,10 @@ function collision() {
         playerLost();
     }
     // Decrease scores
+    if (scoreVal >= 500) {
+        scoreVal -= 500;
+    }
+    else scoreVal = 0;
 
 }
 
@@ -195,7 +199,7 @@ function playAgain() {
     startGame();
 }
 
-// Set scores to 0 and lives to 3
+// Reset scores to 0 and lives to 3
 function startGame() {
     scoreVal = 0;
     lives = lostLives.reverse();
