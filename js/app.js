@@ -121,6 +121,7 @@ let Character = function(x, y, name) {
     this.sprite = 'images/char-' + name + '.png';
 }
 
+// Create Character class
 Character.prototype.render = function() {
     ctxChar.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -131,6 +132,7 @@ let TestCharacter = function(width, height, x, y) {
     this.height = height;
 }
 
+// Create TestCharacter class, which extends the Character class
 TestCharacter.prototype.update = function() {
     const x = this;
     const y = this;
@@ -141,32 +143,29 @@ TestCharacter.prototype.update = function() {
     elem.addEventListener('click', function(event) {
         var xx = event.pageX - elemLeft,
             yy = event.pageY - elemTop;
-        console.log(xx, yy);
             if (xx > x.x && xx < x.x + width.width) {
                 if (yy > y.y && yy < y.y + height.height) {
-                    console.log('first char selected');
+                    player.sprite = 'images/char-boy.png';
                 }
 
                 if (yy > y.y + height.height && yy < y.y + 2 * height.height) {
-                    console.log('second char selected');
+                    player.sprite = 'images/char-cat-girl.png';
                 }
 
                 if (yy > y.y + 2 * height.height && yy < y.y + 3 * height.height) {
-                    console.log('third char selected');
+                    player.sprite = 'images/char-horn-girl.png';
                 }
 
                 if (yy > y.y + 3 * height.height && yy < y.y + 4 * height.height) {
-                    console.log('forth char selected');
+                    player.sprite = 'images/char-pink-girl.png';
                 }
 
                 if (yy > y.y + 4 * height.height && yy < y.y + 5 * height.height) {
-                    console.log('fifth char selected');
+                    player.sprite = 'images/char-princess-girl.png';
                 }
             }
     }, false);
 }
-
-
 
 // Instantiating my objects
 const allEnemies = [new Enemy(-300, 60, 10), new Enemy(-100, 145, 15), new Enemy(-200, 230, 30)];
