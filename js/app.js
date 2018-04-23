@@ -141,7 +141,15 @@ let Gem = function() {
 
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 90, 130);
-};
+}
+
+Gem.prototype.update = function() {
+    if (this.x === player.x + 7 && this.y === player.y + 26) {
+        scoreVal += 50;
+        this.x = positionXGem[randomFunc(5)];
+        this.y = positionYGem[randomFunc(3)];
+    }
+}
 
 // Create Character class
 let Character = function(x, y, name) {
