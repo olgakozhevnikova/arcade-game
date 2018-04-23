@@ -38,6 +38,8 @@ canvas {
 
 #characters {
     visibility: hidden;
+    width: 100px;
+    height: 550px;
 }
 
 .modal {

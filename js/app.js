@@ -118,12 +118,54 @@ Score.prototype.update = function() {
 let Character = function(x, y, name) {
     this.x = x;
     this.y = y;
-    this.sprite = 'images/char-' + name + '.png'
+    this.sprite = 'images/char-' + name + '.png';
 }
 
 Character.prototype.render = function() {
     ctxChar.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+let TestCharacter = function(width, height, x, y) {
+    Character.call(this, x, y);
+    this.width = width;
+    this.height = height;
+}
+
+TestCharacter.prototype.update = function() {
+    const x = this;
+    const y = this;
+    const width = this;
+    const height = this;
+    elemLeft = elem.offsetLeft,
+    elemTop = elem.offsetTop;
+    elem.addEventListener('click', function(event) {
+        var xx = event.pageX - elemLeft,
+            yy = event.pageY - elemTop;
+        console.log(xx, yy);
+            if (xx > x.x && xx < x.x + width.width) {
+                if (yy > y.y && yy < y.y + height.height) {
+                    console.log('first char selected');
+                }
+
+                if (yy > y.y + height.height && yy < y.y + 2 * height.height) {
+                    console.log('second char selected');
+                }
+
+                if (yy > y.y + 2 * height.height && yy < y.y + 3 * height.height) {
+                    console.log('third char selected');
+                }
+
+                if (yy > y.y + 3 * height.height && yy < y.y + 4 * height.height) {
+                    console.log('forth char selected');
+                }
+
+                if (yy > y.y + 4 * height.height && yy < y.y + 5 * height.height) {
+                    console.log('fifth char selected');
+                }
+            }
+    }, false);
+}
+
 
 
 // Instantiating my objects
@@ -136,12 +178,15 @@ let lives = [new Life(3, 540), new Life(36, 540), new Life(69, 540)];
 const scores = new Score(310, 570);
 
 const allCharacters = [
-    new Character(10, 0, 'boy'),
-    new Character(10, 100, 'cat-girl'),
-    new Character(10, 200, 'horn-girl'),
-    new Character(10, 300, 'pink-girl'),
-    new Character(10, 400, 'princess-girl'),
+    new Character(0, 0, 'boy'),
+    new Character(0, 100, 'cat-girl'),
+    new Character(0, 200, 'horn-girl'),
+    new Character(0, 300, 'pink-girl'),
+    new Character(0, 400, 'princess-girl'),
 ];
+
+// This object is used just to calculate coordinates for clicks when choosing a character
+const testChar = new TestCharacter(64, 97, 0, 62);
 
 // Open menu to choose a character
 function showCharacters() {

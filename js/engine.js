@@ -31,6 +31,7 @@ var Engine = (function(global) {
     // Another canvas to choose characters
     var canvasCharacters = doc.createElement('canvas'),
         ctxChar = canvasCharacters.getContext('2d');
+    canvasCharacters.id = 'canvasId';
     canvasCharacters.width = 100;
     canvasCharacters.height = 600;
     document.getElementById('characters').appendChild(canvasCharacters);
@@ -102,6 +103,7 @@ var Engine = (function(global) {
         });
         player.update();
         scores.update();
+        testChar.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -202,6 +204,8 @@ var Engine = (function(global) {
      * object when run in a browser) so that developers can use it more easily
      * from within their app.js files.
      */
+    var elem = document.getElementById('canvasId');
     global.ctx = ctx;
     global.ctxChar = ctxChar;
+    global.elem = elem;
 })(this);
