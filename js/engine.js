@@ -29,12 +29,12 @@ var Engine = (function(global) {
     document.getElementById('canvas').appendChild(canvas);
 
     // Another canvas to choose characters
-    var canvasCharacters = doc.createElement('canvas'),
-        ctxChar = canvasCharacters.getContext('2d');
-    canvasCharacters.id = 'canvasId';
-    canvasCharacters.width = 100;
-    canvasCharacters.height = 600;
-    document.getElementById('characters').appendChild(canvasCharacters);
+    var canvasChar = doc.createElement('canvas'),
+        ctxChar = canvasChar.getContext('2d');
+    canvasChar.id = 'canvasId';
+    canvasChar.width = 400;
+    canvasChar.height = 600;
+    document.getElementById('characters').appendChild(canvasChar);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -129,7 +129,8 @@ var Engine = (function(global) {
             row, col;
         
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctxChar.clearRect(0,0,canvasChar.width,canvasChar.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -159,17 +160,28 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+        gems.forEach(function(gem) {
+            gem.render();
+        });
+
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
 
         player.render();
+
         lives.forEach(function(life) {
             life.render();
         });
+
         scores.render();
+
         allCharacters.forEach(function(character) {
             character.render();
+        });
+
+        names.forEach(function(charName) {
+            charName.render();
         });
     }
 
@@ -196,7 +208,10 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/Heart.png',
-        'images/Star.png'
+        'images/Star.png',
+        'images/Gem-blue.png',
+        'images/Gem-green.png',
+        'images/Gem-orange.png'
     ]);
     Resources.onReady(init);
 
