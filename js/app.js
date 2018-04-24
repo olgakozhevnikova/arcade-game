@@ -250,7 +250,7 @@ setInterval(function() {
 function reachedWater() {
     player.reset();
     scoreVal += 100;
-    if (scoreVal === 100) {
+    if (scoreVal >= 1000) {
         playerWon();
     }
 }
@@ -295,17 +295,11 @@ function playAgain() {
 // Reset scores to 0 and lives to 3
 function startGame() {
     scoreVal = 0;
-    if (lives.length != 0){
-        let life = lostLives.pop();
-        lives.push(life);
+    lostLives.reverse();
+    for (let i = 0; i < lostLives.length; i++) {
+        lives.push(lostLives[i]);
     }
-
-    else {
-        lives = lostLives.reverse();
-        lostLives = [];
-    }
-
-    player.sprite = 'images/char-boy.png';
+    lostLives = [];
 }
 
 // Instantiating my objects
