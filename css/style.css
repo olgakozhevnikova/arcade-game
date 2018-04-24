@@ -39,6 +39,25 @@ canvas {
 	margin-top: -3em;
 }
 
+#mainBtn {
+    padding: 12px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    background-color: white; 
+    color: black; 
+    border: 4px solid #008CBA;
+    cursor: pointer;
+    font-family: downloadedFont;
+}
+
+#mainBtn:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
 #characters {
     visibility: hidden;
     width: 300px;
