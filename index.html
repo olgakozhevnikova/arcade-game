@@ -8,26 +8,26 @@
 <body>
 	<div id="content">
 		<h1>Arcade game: Frogger</h1>
-		<div id="section">
-			<button onclick="showCharacters()">Choose character</button>
-			<div id="characters"></div>
-		</div>
-		<div id="canvas"></div>
-
 		<div id="winningModal" class="modal">
 	        <div class="modal-content">
-	            <span><i class="fa fa-check-circle-o"></i></span>
-	            <h3>Congratulations! You won!</h3>
+	            <h3>Congratulations!</h3>
+	            <p>You won!</p>
 	            <button id="btn" onclick="playAgain()">Play again!</button>
 	        </div>
 		</div>
 		<div id="losingModal" class="modal">
 			<div class="modal-content">
 				<h3>Game over!</h3>
-				<p>You lost</p>
+				<p>You lost the battle.</p>
+				<p>Try again.</p>
 				<button id="btn" onclick="playAgain()">Play again!</button>
 			</div>
 		</div>
+		<div id="section">
+			<button onclick="showCharacters()">Choose character</button>
+			<div id="characters"></div>
+		</div>
+		<div id="canvas"></div>
     </div>
     
     <script src="js/resources.js"></script>

@@ -250,7 +250,9 @@ setInterval(function() {
 function reachedWater() {
     player.reset();
     scoreVal += 100;
-    playerWon();
+    if (scoreVal === 100) {
+        playerWon();
+    }
 }
 
 // When collision happens
@@ -275,9 +277,7 @@ function collision() {
 
 // When scores are 1000 game over, player wins
 function playerWon() {
-    if (scoreVal === 1000) {
-        winningModal.style.display = 'block';
-    }
+    winningModal.style.display = 'block';
 }
 
 // Game over, when there are no lives
@@ -298,7 +298,6 @@ function startGame() {
     lives = lostLives.reverse();
     lostLives = [];
     player.sprite = 'images/char-boy.png';
-    gem.countdown = 200;
 }
 
 // Instantiating my objects
