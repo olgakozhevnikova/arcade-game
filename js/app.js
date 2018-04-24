@@ -295,8 +295,16 @@ function playAgain() {
 // Reset scores to 0 and lives to 3
 function startGame() {
     scoreVal = 0;
-    lives = lostLives.reverse();
-    lostLives = [];
+    if (lives.length != 0){
+        let life = lostLives.pop();
+        lives.push(life);
+    }
+
+    else {
+        lives = lostLives.reverse();
+        lostLives = [];
+    }
+
     player.sprite = 'images/char-boy.png';
 }
 
